@@ -1,0 +1,31 @@
+<ion-view view-title="新闻" ng-controller="BrowseCtrl">
+  <ion-content>
+  <ion-refresher on-refresh="doRefresh()">
+      </ion-refresher>
+    <div class="list card" ng-repeat="new in news">
+	  <div class="item item-avatar">
+	    <img src="http://placehold.it/64x64">
+	    <h2>{{new.new_title}}</h2>
+	    <p>{{new.new_date}}</p>
+	  </div>
+	  <div class="item item-body">
+	    <p ng-bind-html="new.new_body | trustHtml">
+	    </p>
+	  </div>
+	  <div class="item tabs tabs-secondary tabs-icon-left">
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-thumbsup"></i>
+	      赞
+	    </a>
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-chatbox"></i>
+	      评论
+	    </a>
+	    <a class="tab-item" href="#">
+	      <i class="icon ion-share"></i>
+	      分享
+	    </a>
+	  </div>
+	</div>
+  </ion-content>
+</ion-view>

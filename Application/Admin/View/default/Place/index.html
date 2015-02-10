@@ -1,0 +1,22 @@
+<extend name="Public:admin"/>
+<block name="extra-js">
+<script>
+
+</script>
+</block>
+<block name="main-content">	
+      <div class="row">
+		<h1>全局信息</h1>
+	  </div>
+	  <div class="row">
+		<form class="form-horizontal" role="form" method="post" id="info_form" action="__URL__/update?place={$place}">
+
+		<div class="form-group">
+			<label for="information" class="col-sm-2 control-label">景点名称</label>
+			<div class="col-sm-8"><input type="text" class="form-control" name="name" value="{$name}"></div>
+		</div>
+		<div class="row col-sm-8 col-sm-offset-9"><button class="btn btn-primary" type="submit" />提交修改</button></div>
+	</form>
+	</div>
+</block>
+

@@ -1,0 +1,82 @@
+<extend name="Public:admin"/>
+<block name="extra-js">
+<script src="__JS__/common/setCover.js"></script>
+<script src="__JS__/common/postEdit.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".editbtn").bind("click",function(){
+		var $key = $(this).attr("data");
+		$.ajax({
+			url:"__URL__/edit",
+			data: { key: $key },
+			type:"post",
+			dataType:"text",
+			success: function(data){
+				$data = $.parseJSON(data);
+				$("#edit_hotel_name").val($data["hotel_name"]);
+				$("#edit_hotel_addr").val($data["hotel_addr"]);
+				$("#edit_hotel_more").val($data["hotel_more"]);
+				$("#edit_hotel_detail").val($data["hotel_detail"]);
+				$("#hotel_edit_form").attr("action","__URL__/update?place="+$key);
+				$("#hotelEditModal").modal("show");
+			}
+		});
+	});
+});
+</script>
+</block>
+		<block name="main-content">	
+	
+	<!-- start 住宿信息 -->
+		<div class="row">
+			<h1>住宿信息</h1>
+		  </div>
+		<div class="row">
+        	<form class="form-horizontal" role="form" method="post" id="hotel_form">
+        	<volist name="hotel_arr" id="vo">
+				<h2>{$vo.hotel_name}</h2>
+				<div class="btn-group" role="group">
+					<a href="javascript:void(0)" class="btn btn-default editbtn" data="{$key}">编辑</a>&nbsp;
+					<a class="btn btn-default" href="__URL__/delete?place={$place}&key={$key}">删除</a>
+				</div>
+				
+				<div class="form-group">
+					<label for="hotel_cover" class="col-sm-2 control-label">酒店封面</label>
+					<div class="col-sm-8"><input type="text" name="hotel_cover{$key}" id="hotel_cover{$key}" value="{$vo.hotel_cover}" required>&nbsp;
+					<a class="btn btn-default" data-toggle="modal" data-target="#coverModal" href="#" onclick="setCover.setId({$key})">选择封面</a></div>
+				</div>
+				<div class="form-group">
+   					 <label for="hotel_name" class="col-sm-2 control-label">酒店名字</label>
+    					<div class="col-sm-8"><input type="text" class="form-control" id="hotel_name" value="{$vo.hotel_name}" name="hotel_name{$key}"></div>
+ 			  </div>
+ 			  <div class="form-group">
+   					 <label for="hotel_addr" class="col-sm-2 control-label">地址</label>
+    					<div class="col-sm-8"><input type="text" class="form-control" id="hotel_addr" value="{$vo.hotel_addr}" name="hotel_addr{$key}"></div>
+ 			  </div>
+				<div class="form-group">
+					<label for="hotel_detail" class="col-sm-2 control-label">具体信息</label>
+					<div class="col-sm-8"><input class="form-control" type="text" name="hotel_detail{$key}" value="{$vo.hotel_detail}"></div>
+        		</div>
+				<div class="form-group">
+					<label for="information" class="col-sm-2 control-label">更多信息</label>
+					<div class="col-sm-8"><textarea class="form-control" rows="5" id="hotel_more" name="hotel_more{$key}">{$vo.hotel_more}</textarea></div>
+				</div>
+			</volist>
+			</form>
+		</div>
+	<!-- end 住宿信息 -->
+	<!-- start modal -->
+	<include file="Public/hotelSetcover" />
+	<!-- end modal -->
+
+	<div class="row">
+		<button class="btn btn-success" data-toggle="modal" data-target="#hotelModal" href="#">添加信息</button>
+	</div>
+	<!-- start modal -->
+<include file="Public/hotelCreatemodal" />
+	<!-- 编辑 -->
+<include file="Public/hotelEditmodal" />
+	<!-- end modal -->
+
+</block>
+

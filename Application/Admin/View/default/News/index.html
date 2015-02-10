@@ -1,0 +1,103 @@
+<extend name="Public:admin"/>
+<block name="extra-js">
+<link rel="stylesheet" href="__CSS__/plugins/simditor.css">
+<script type="text/javascript" src="__JS__/plugins/module.min.js"></script>
+<script type="text/javascript" src="__JS__/plugins/hotkeys.min.js"></script>
+<script type="text/javascript" src="__JS__/plugins/uploader.min.js"></script>
+<script type="text/javascript" src="__JS__/plugins/simditor.min.js"></script>
+<script>
+$(function(){
+	toolbar = [ 'title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent' ];
+	var editor = new Simditor({ textarea: $('#new_body'),toolbar:toolbar});
+	$(".simditor-toolbar").css("width","100%");
+	$(".editbtn").bind("click",function(){
+		var $key = $(this).attr("data");
+		$.ajax({
+			url:"__URL__/edit",
+			data: { key: $key },
+			type:"post",
+			dataType:"text",
+			success: function(data){
+				$data = $.parseJSON(data);
+				$("#new_title").val($data["new_title"]);
+				$(".simditor-body").empty();
+				$($data["new_body"]).appendTo(".simditor-body");
+				$("#new_form").attr("action","__URL__/update?new_id="+$key);
+				$("#newEditModal").modal("show");
+			}
+		});
+	});
+
+	$(".delbtn").bind("click",function(){
+		var $flag = confirm("是否确定删除?");
+		if($flag){
+			var $key = $(this).attr("data");
+			$.ajax({
+				url:"__URL__/delete",
+				data: { key: $key },
+				type:"post",
+				dataType:"text",
+				success: function(data){
+					setTimeout(function(){
+						window.location.reload();
+					},1000);
+				}
+			});
+		}
+	});
+
+	$(".addbtn").bind("click",function(){
+		$("#new_title").val("");
+		$(".simditor-body p").replaceWith("");
+		$("#new_form").attr("action","__URL__/insert");
+		$("#newEditModal").modal("show");
+	});
+
+});
+</script>
+</block>
+		<block name="main-content">	
+	      <div class="row">
+	        <h2>新闻管理</h2>
+	            <div class="panel panel-default">
+	            	<div class="panel-body">
+	            		<div class="btn-group" role="group">
+	            			<button class="btn btn-default addbtn" type="button">添加新闻</button>
+	            		</div>
+	            	</div>
+	            </div>
+	      </div>
+	    <div class="row">
+			<ul class="timeline">
+	      	<volist name="news_arr" id="vo">
+	      	<if condition="$key%2==0"><li>
+			    <else /><li class="timeline-inverted"></if>
+			          <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+			          <if condition="$key%2==0"><div class="timeline-panel animated slideInLeft">
+						<else /> <div class="timeline-panel animated slideInRight">
+			          </if>
+			            <div class="timeline-heading">
+			              <h4 class="timeline-title">{$vo.new_title}</h4>
+			              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {$vo.new_date}</small></p>
+			            </div>
+			            <div class="timeline-body">
+			              <p>{$vo.new_body}</p>
+			              <hr>
+			              <div class="btn-group">
+			                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+			                  <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
+			                </button>
+			                <ul class="dropdown-menu" role="menu">
+			                  <li><a href="#" class="editbtn" data="{$vo.new_id}">编辑</a></li>
+			                  <li><a href="#" class="delbtn" data="{$vo.new_id}">删除</a></li>
+			                </ul>
+			              </div>
+			            </div>
+			        </li>
+			    </volist>
+			</ul>
+		</div>
+<link rel="stylesheet" href="__CSS__/plugins/timeline.css">
+<include file="Public/newsEditmodal" />
+</block>
+

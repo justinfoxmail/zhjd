@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link rel="stylesheet" href="__CSS__/ratchet.min.css">
+<style type="text/css">
+ul, menu {
+display: block;
+list-style-type: disc;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 40px;
+}
+.maps ul {
+display: table;
+width: 100%;
+background-color: #fff;
+}
+.hotel-detail .maps {
+overflow: hidden;
+font-size: 15px;
+padding: 10px 0;
+background-color: #ededed;
+}
+div {
+display: block;
+}
+.maps li.ico {
+width: 19px;
+padding: 14px 0;
+}
+.maps li {
+display: table-cell;
+height: 43px;
+vertical-align: middle;
+padding: 14px 14px 14px 0;
+min-height: 43px;
+line-height: 1.4em;
+}
+ul{
+  list-style-type: disc;
+}
+.maps .go {
+width: 50px;
+display: table-cell;
+vertical-align: middle;
+background: url(/mobile/images/turn_v1.png) right center no-repeat;
+background-size: 19px 12px;
+}
+</style>
+</head>
+<body>
+
+<header class="bar bar-nav">
+ <include file="Public/header" />
+  <h1 class="title"><block name="hotel_name"></block></h1>
+</header>
+<div class="content">
+  <div class="card">
+    <li class="box" style="list-style-type:none;">
+        <a href="<block name="hotel_cover"></block>" class="swipebox" title="Fog">
+          <img src="<block name="hotel_cover"></block>" alt="image" style="height:300px;width:100%;">
+        </a>
+      </li>
+  </div>
+  <div class="card">
+    <h4>珠海银都酒店攻略</h4>
+        <div class="s-content expanded">
+            <div>
+
+                <p><block name="hotel_detail"></block></p>
+            </div>
+        </div>
+  </div>
+  <div class="maps">
+    <a href="/poi/map_32415.html">
+        <ul>
+            <li class="ico"><span class="icon icon-search"></span></i></li>
+            <li class="address"><div>{$hotel_addr}</div></li>
+            <li class="go"><p>地图</p></li>
+        </ul>
+    </a>
+  </div>
+
+  <block name="hotel_more">{$hotel_more}</block>
+</div>
+
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script src="__JS__/base.js"></script>
+</body>
+</html>
