@@ -15,7 +15,8 @@ $(function(){
 				$data = $.parseJSON(data);
 				$("#edit_res_name").val($data["res_name"]);
 				$("#edit_res_introduction").val($data["res_introduction"]);
-				$("#edit_res_time").val($data["res_time"]); 
+				$("#edit_res_time").val($data["res_time"]);
+				$("#edit_res_tel").val($data["res_tel"]);
 				$("#edit_res_location").val($data["res_location"]);
 				$("#edit_res_feature").val($data["res_feature"]);
 				$("#edit_res_notice").val($data["res_notice"]);
@@ -37,37 +38,64 @@ $(function(){
 						<div class="btn-group" role="group">
 							<a href="javascript:void(0)" class="btn btn-default editbtn" data="{$key}">编辑</a>&nbsp;
 							<a href="__URL__/delete?place={$place}&key={$key}" class="btn btn-default">删除</a>
+						</div><br><br>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">餐厅名字</h3>
+						  </div>
+						  <div class="panel-body">
+						    {$vo.res_name}
+						  </div>
 						</div>
-						<div class="form-group">
-		   					 <label for="res_name" class="col-sm-2 control-label">餐厅名字</label>
-		    					<div class="col-sm-8"><input type="text" class="form-control" id="res_name" value="{$vo.res_name}" name="res_name{$key}"></div>
-		 			    </div>
-
-						<div class="form-group">
-							<label for="information" class="col-sm-2 control-label">简介</label>
-							<div class="col-sm-8"><textarea class="form-control" rows="5" id="res_more" name="res_introduction{$key}">{$vo.res_introduction}</textarea></div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">简介</h3>
+						  </div>
+						  <div class="panel-body">
+						    {$vo.res_introduction}
+						  </div>
 						</div>
-
-						<div class="form-group">
-		   					 <label for="res_time" class="col-sm-2 control-label">营业时间</label>
-		    					<div class="col-sm-8"><input type="text" class="form-control" id="res_time" value="{$vo.res_time}" name="res_time{$key}"></div>
-		 			    </div>
-
-		 			    <div class="form-group">
-		   					 <label for="res_location" class="col-sm-2 control-label">餐厅地址</label>
-		    					<div class="col-sm-8"><input type="text" class="form-control" id="res_location" value="{$vo.res_location}" name="res_location{$key}"></div>
-		 			    </div>
-
-		 			    <div class="form-group">
-		   					 <label for="res_feature" class="col-sm-2 control-label">餐厅特色</label>
-		    					<div class="col-sm-8"><input type="text" class="form-control" id="res_feature" value="{$vo.res_feature}" name="res_feature{$key}"></div>
-		 			    </div>
-
-		 			    <div class="form-group">
-		   					 <label for="res_notice" class="col-sm-2 control-label">注意事项</label>
-		    					<div class="col-sm-8"><input type="text" class="form-control" id="res_notice" value="{$vo.res_notice}" name="res_notice{$key}"></div>
-		 			    </div>
-
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">营业时间</h3>
+						  </div>
+						  <div class="panel-body">
+						    {$vo.res_time}
+						  </div>
+						</div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">餐厅地址</h3>
+						  </div>
+						  <div class="panel-body">
+						    {$vo.res_location}
+						  </div>
+						</div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">预定电话</h3>
+						  </div>
+						  <div class="panel-body">
+						    {$vo.res_tel}
+						  </div>
+						</div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">餐厅特色</h3>
+						  </div>
+						  <div class="panel-body">
+						    {$vo.res_feature}
+						  </div>
+						</div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">注意事项</h3>
+						  </div>
+						  <div class="panel-body">
+						    {$vo.res_notice}
+						  </div>
+						</div>
+	
 					</volist>
 				</form>
 		<!-- end 餐饮信息 -->

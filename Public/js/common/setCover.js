@@ -6,7 +6,7 @@ setCover.setId = function(id){
 	setCover.id = id;
 };
 setCover.setCover = function(key){
-	document.getElementById("hotel_cover"+this.id).value = $("#coverImg"+key).attr("src");
+	document.getElementById("hotel_cover"+this.id).innerHTML = $("#coverImg"+key).attr("src");
 	$flag = confirm("选择该图片为封面");
 	if($flag==true) {
 		$.post(

@@ -10,7 +10,6 @@ class PhotosController extends Controller {
         $img_cover = $Photos->getCover($Pid);
         $img_data = $Photos->getData($Pid);
         $this->assign('place',$Pid);
-        $this->assign('img_cover',$img_cover);
         $this->assign('img_arr',$img_data);
         $this->assign('img_count',count($img_data));
         $this->assign('MODELID','Photos');
@@ -52,13 +51,6 @@ class PhotosController extends Controller {
                     foreach($info as $file) {
                         $data['img_url'] = $file['savepath'].$file['savename'];
                         $data['img_title'] = I("post.img_title")==null?"unname":I("post.img_title");
-                        if($_POST['img_cover']=='1') {
-                            if($cover = $Photos->where('place_id='.$place.' AND img_cover=1')){
-                                $cdata['img_cover'] = null;
-                                $cover->save($cdata);
-                            }
-                            $data['img_cover'] =1;
-                        }
                         $data['place_id'] = $place;
                         if($Photos->data($data)->add()) {
                             $this->success("上传成功!");

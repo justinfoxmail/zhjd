@@ -35,18 +35,15 @@ function getObjectURL(file) {
 	            	<label for="img_title">图片标题</label>
 	            	<input type="text" name="img_title" required="required"><br>
 				    <input type="file" name="img_file"required="required" id="file0">
-				    <input type="checkbox" name="img_cover" value="1"/>景点封面<br><br>
 				    <input class="btn btn-primary" type="submit" value="确定"></div>
 				    <div class="col-sm-6">
-				    <img src="__UPLOADS__/{$img_cover}" alt="" style="border:1px solid black;width:240px;height:240px;">
-				    <p>景点封面</p>
+					    <div style="display:none;" id="preview">
+					    	<h4>图片预览</h4>
+					    	<img src="" id="img0" style="width:320px;height:320px;">
+					    </div>
 				    </div>
 				</div>
 			    </form>
-			    <div style="display:none;" id="preview">
-			    	<h4>图片预览</h4>
-			    	<img src="" id="img0" style="width:320px;height:320px;">
-			    </div>
 			    <h2>相册</h2>
 			    <volist name="img_arr" id="vo">
 			    	<div class="col-sm-4">

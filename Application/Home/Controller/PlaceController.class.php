@@ -7,10 +7,7 @@ class PlaceController extends Controller {
         $Place = M('Place');
         $THEME = $Place->where('id='.$ID)->getField('theme');
         $PLACE_NAME = $Place->where('id='.$ID)->getField('name');
-        $img_cover = M("Photos")->where('place_id='.$ID.' AND img_cover=1')->select();
-        $this->assign('img_cover',$img_cover[0]['img_url']);
         $this->assign('pid',$ID);
-        $this->assign('place_name',$PLACE_NAME);
 	    $this->theme($THEME)->display();
     }
 
@@ -63,6 +60,7 @@ class PlaceController extends Controller {
         $this->assign('hotel_name',$hotel_data['hotel_name']);
         $this->assign('hotel_addr',$hotel_data['hotel_addr']);
         $this->assign('hotel_more',$hotel_data['hotel_more']);
+        $this->assign('hotel_tel',$hotel_data['hotel_tel']);
         $this->assign('hotel_cover',$hotel_data['hotel_cover']);
         $this->assign('hotel_detail',$hotel_data['hotel_detail']);
         $this->assign('name',$hotels['name']);

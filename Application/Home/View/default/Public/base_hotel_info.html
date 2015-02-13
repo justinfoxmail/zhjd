@@ -50,6 +50,9 @@ vertical-align: middle;
 background: url(/mobile/images/turn_v1.png) right center no-repeat;
 background-size: 19px 12px;
 }
+hr {
+  opacity: 0.5;
+}
 </style>
 </head>
 <body>
@@ -61,22 +64,22 @@ background-size: 19px 12px;
 <div class="content">
   <div class="card">
     <li class="box" style="list-style-type:none;">
-        <a href="<block name="hotel_cover"></block>" class="swipebox" title="Fog">
           <img src="<block name="hotel_cover"></block>" alt="image" style="height:300px;width:100%;">
         </a>
       </li>
   </div>
-  <div class="card">
+  <ul class="table-view">
+  <li class="table-view-cell">
     <h4>珠海银都酒店攻略</h4>
-        <div class="s-content expanded">
-            <div>
-
-                <p><block name="hotel_detail"></block></p>
-            </div>
-        </div>
-  </div>
+      <div class="s-content expanded">
+          <div>
+              <p><block name="hotel_detail"></block></p>
+          </div>
+      </div>
+      <a class="btn btn-positive" href="tel:<block name="hotel_tel"></block>">预定电话</a>
+  </li>
   <div class="maps">
-    <a href="/poi/map_32415.html">
+    <a>
         <ul>
             <li class="ico"><span class="icon icon-search"></span></i></li>
             <li class="address"><div>{$hotel_addr}</div></li>
@@ -84,11 +87,14 @@ background-size: 19px 12px;
         </ul>
     </a>
   </div>
-
-  <block name="hotel_more">{$hotel_more}</block>
+  <hr>
+    <li class="table-view-cell">
+      <h2>更多信息</h2>
+      <block name="hotel_more">{$hotel_more}</block>
+    </li>
+  </ul>
 </div>
 
 <script src="__JS__/jquery-2.1.1.min.js"></script>
-<script src="__JS__/base.js"></script>
 </body>
 </html>

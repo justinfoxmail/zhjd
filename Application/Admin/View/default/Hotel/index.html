@@ -15,6 +15,7 @@ $(function(){
 				$data = $.parseJSON(data);
 				$("#edit_hotel_name").val($data["hotel_name"]);
 				$("#edit_hotel_addr").val($data["hotel_addr"]);
+				$("#edit_hotel_tel").val($data["hotel_tel"]);
 				$("#edit_hotel_more").val($data["hotel_more"]);
 				$("#edit_hotel_detail").val($data["hotel_detail"]);
 				$("#hotel_edit_form").attr("action","__URL__/update?place="+$key);
@@ -38,29 +39,57 @@ $(function(){
 				<div class="btn-group" role="group">
 					<a href="javascript:void(0)" class="btn btn-default editbtn" data="{$key}">编辑</a>&nbsp;
 					<a class="btn btn-default" href="__URL__/delete?place={$place}&key={$key}">删除</a>
-				</div>
+				</div><br><br>
 				
-				<div class="form-group">
-					<label for="hotel_cover" class="col-sm-2 control-label">酒店封面</label>
-					<div class="col-sm-8"><input type="text" name="hotel_cover{$key}" id="hotel_cover{$key}" value="{$vo.hotel_cover}" required>&nbsp;
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">酒店封面</h3>
+				  </div>
+				  <div class="panel-body">
+				    <div class="col-sm-8"><p id="hotel_cover{$key}">{$vo.hotel_cover}</p>
 					<a class="btn btn-default" data-toggle="modal" data-target="#coverModal" href="#" onclick="setCover.setId({$key})">选择封面</a></div>
+				  </div>
 				</div>
-				<div class="form-group">
-   					 <label for="hotel_name" class="col-sm-2 control-label">酒店名字</label>
-    					<div class="col-sm-8"><input type="text" class="form-control" id="hotel_name" value="{$vo.hotel_name}" name="hotel_name{$key}"></div>
- 			  </div>
- 			  <div class="form-group">
-   					 <label for="hotel_addr" class="col-sm-2 control-label">地址</label>
-    					<div class="col-sm-8"><input type="text" class="form-control" id="hotel_addr" value="{$vo.hotel_addr}" name="hotel_addr{$key}"></div>
- 			  </div>
-				<div class="form-group">
-					<label for="hotel_detail" class="col-sm-2 control-label">具体信息</label>
-					<div class="col-sm-8"><input class="form-control" type="text" name="hotel_detail{$key}" value="{$vo.hotel_detail}"></div>
-        		</div>
-				<div class="form-group">
-					<label for="information" class="col-sm-2 control-label">更多信息</label>
-					<div class="col-sm-8"><textarea class="form-control" rows="5" id="hotel_more" name="hotel_more{$key}">{$vo.hotel_more}</textarea></div>
-				</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">酒店名字</h3>
+					  </div>
+					  <div class="panel-body">
+					    {$vo.hotel_name}
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">地址</h3>
+					  </div>
+					  <div class="panel-body">
+					    {$vo.hotel_addr}
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">电话</h3>
+					  </div>
+					  <div class="panel-body">
+					    {$vo.hotel_tel}
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">具体信息</h3>
+					  </div>
+					  <div class="panel-body">
+					    {$vo.hotel_detail}
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">更多信息</h3>
+					  </div>
+					  <div class="panel-body">
+					    {$vo.hotel_more}
+					  </div>
+					</div>
 			</volist>
 			</form>
 		</div>
