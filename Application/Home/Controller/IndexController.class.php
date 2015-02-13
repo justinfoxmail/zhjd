@@ -9,18 +9,31 @@ class IndexController extends Controller {
     public function doLogin() {
         if(IS_POST) {
             $User = M("User");
-            $params = json_decode(file_get_contents('php://input'),true);
+            if(empty(I("post."))){
+                $params = json_decode(file_get_contents('php://input'),true);
+            } else {
+                $params = I("post.");
+            }
             $map['loginname'] = $params['username'];
             $map['password'] = md5($params['password']);
-            if(session('?user')==true){
-                $this->ajaxReturn(2);
-            }
             if($User->where($map)->select()){
                 session("user",$map['loginname']);
+                $data['lastlogin'] = date('Y-m-d H:i:s');
+                $data['lastip'] = get_client_ip();
+                $User->where($map)->data($data)->save();
                 $this->ajaxReturn(1);
             }
-            $this->ajaxReturn(session("user"));
+            $this->ajaxReturn(0);
         }
+    }
+
+    public function doLogout() {
+        if(session('?user')==true) {
+            if(session('user',null)){
+                $this->ajaxReturn(1);
+            }
+        }
+        $this->ajaxReturn(0);
     }
 
     public function getIndexs() {

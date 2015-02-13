@@ -5,12 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <link rel="stylesheet" href="__CSS__/ratchet.min.css">
 <style>
-h1,h2,h3,h4,h5,h6{
-  font-family: 'Merriweather', serif;
-  font-weight: 700;
-}
-
-
 .comments article.comment {
   position: relative;
 }
@@ -113,9 +107,18 @@ h1,h2,h3,h4,h5,h6{
 </section><br>
 <if condition="$user neq '' ">
 <form action="__URL__/post_comment?pid={$pid}&user={$user}" method="post">
-	<textarea name="comment_body" id="comment" rows="5" placeholder="填写你的评论"></textarea>
+	<textarea name="comment_body" id="comment" rows="5" placeholder="填写你的评论" required></textarea>
 	<button class="btn btn-positive btn-block" type="submit">评论</button>
-</form><else />登录才能发表评论
+	<button class="btn btn-negative btn-block" id="dologout">登出</button><br><br><br>
+</form><else />
+<form id="loginForm" style="display:none;">
+<p id="loginerr" style="color:red;"></p>
+  <input type="text" placeholder="用户名" name="username">
+  <input type="password" placeholder="密码" name="password">
+  <a class="btn btn-positive btn-block" id="dologin">登录</a>
+</form>
+<button class="btn btn-primary btn-block" id="loginBtn">点此登录发表评论</button>
+<br><br><br>
 </if>
 
 </div>
@@ -123,6 +126,34 @@ h1,h2,h3,h4,h5,h6{
 <script type="text/javascript">
 	$(".active").removeClass("active");
 $("#comments").addClass("active");
+$("#loginBtn").bind("click",function(){
+	$(this).hide(1000);
+	$("#loginForm").toggle(1000);
+});
+$("#dologin").bind("click",function(){
+	$data = $("#loginForm").serialize();
+	$.post(
+		"/index.php/Index/doLogin",
+		$data,
+		function(data) {
+			if(data==1) {
+				$("#loginerr").html("");
+				location.reload(); 
+			} else {
+				$("#loginerr").html("登录失败");
+			}
+		}
+	);
+});
+$("#dologout").bind("click",function(){
+	$.ajax({
+		url:"/index.php/Index/doLogout",
+		type:"post",
+		success: function(data) {
+			location.reload();
+		}
+	});
+});
 </script>
 </body>
 </html>

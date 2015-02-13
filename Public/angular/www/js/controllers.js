@@ -14,6 +14,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.login = function() {
+    $scope.loginData.loginstatus = "";
     $scope.modal.show();
   };
 
@@ -25,16 +26,11 @@ angular.module('starter.controllers', [])
               break;
         case 1:
               $scope.loginData.loginstatus = "登录成功";
-              break;
-        case 2:
-              $scope.loginData.loginstatus = "你已经登录过了";
+              $timeout(function() {
+                $scope.closeLogin();
+              }, 1000);
       }
-      $scope.loginData.loginstatus = "";
     });
-
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
   };
 })
 
