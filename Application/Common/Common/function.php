@@ -32,7 +32,7 @@ function update_permitssion($loginname){
 	session('BackUp_PERMIT', $PERMITSSION[0]['BackUp_PERMIT']);
 	session('ChartAnalyse_PERMIT', $PERMITSSION[0]['ChartAnalyse_PERMIT']);
 	session('News_PERMIT', $PERMITSSION[0]['News_PERMIT']);
-	session('Activity_PERMIT', $PERMITSSION[0]['Activity_PERMIT']);
+	session('Comment_PERMIT', $PERMITSSION[0]['Comment_PERMIT']);
 	session('Contact_PERMIT', $PERMITSSION[0]['Contact_PERMIT']);
 }
 

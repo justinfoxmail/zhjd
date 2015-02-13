@@ -27,6 +27,8 @@ class UserModel extends RelationModel {
                     $supmt = C('SUPERUSER_PERMITSSION');
                 }if($data['usertype']==1){
                     $supmt = C('STORE_PERMITSSION');
+                }if($data['usertype']==1){
+                    $supmt = C('PERMITSSION_TO_ZERO');
                 }
                 $Permitssion = M('Permitssion');
                 $supmt['user_id'] = $this->where('loginname='."'".$data['loginname']."'")->getField('user_id');

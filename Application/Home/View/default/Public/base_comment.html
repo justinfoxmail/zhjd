@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link rel="stylesheet" href="__CSS__/ratchet.min.css">
+<style>
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+}
+
+
+.comments article.comment {
+  position: relative;
+}
+
+.comments article.comment .meta{
+  height: 40px;
+  margin-bottom: 17px;
+  position: relative; 
+}
+
+.comments article.comment .meta img.avatar {
+  position: absolute;
+  border-radius: 30px;
+  width: 60px;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+}
+
+.comments article.comment .meta a.author,
+.comments article.comment .meta a.date {
+  text-decoration: none;
+  position: absolute;
+}
+
+.comments article.comment .meta a.author {
+  color: inherit;
+  left: 10px;
+  line-height: 29px;
+  padding: 0px 7px;
+  top: 3px;
+}
+
+.comments article.comment .meta a.date {
+  font-size: 14px;
+  line-height: 19px;
+  color: #666666;
+  left: 15px;
+  top: 35px;
+}
+
+.comments article.comment .content {
+  background-color: #F5F5F5;
+  border: 1px solid #DADADA;
+  border-radius: 4px;
+  padding: 11px 12px;
+  position: relative;
+}
+
+.comments article.comment .content:after, 
+.comments article.comment .content:before {
+	bottom: 100%;
+	left: 30px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.comments article.comment .content:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #ffffff;
+	border-width: 12px;
+	margin-left: -12px;
+}
+.comments article.comment .content:before {
+	border-color: rgba(245, 47, 47, 0);
+	border-bottom-color: #DADADA;
+	border-width: 13px;
+	margin-left: -13px;
+}
+</style>
+</head>
+<body>
+<header class="bar bar-nav">
+<a class="btn btn-link btn-nav pull-left" href="javascript:history.back(-1);">
+ <include file="Public/header" />
+  <h1 class="title">评论</h1>
+</header>
+
+ <include file="Public/navtab" />
+
+<div class="content">
+<section class="comments">
+<volist name="comments" id="vo">
+<article class="comment ">
+    <div class="meta">
+      <b><a href="#" class="author">{$vo.user}</a></b>
+        <a href="#" class="date">
+          <p>{$vo.comment_date}</p>
+        </a>
+    </div>
+    <div class="content">
+      <p>{$vo.comment_body}</p>
+    </div>
+  </article>
+  </volist>
+</section><br>
+<if condition="$user neq '' ">
+<form action="__URL__/post_comment?pid={$pid}&user={$user}" method="post">
+	<textarea name="comment_body" id="comment" rows="5" placeholder="填写你的评论"></textarea>
+	<button class="btn btn-positive btn-block" type="submit">评论</button>
+</form><else />登录才能发表评论
+</if>
+
+</div>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+	$(".active").removeClass("active");
+$("#comments").addClass("active");
+</script>
+</body>
+</html>

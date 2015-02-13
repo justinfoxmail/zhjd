@@ -101,11 +101,35 @@ class PlaceController extends Controller {
         $this->theme($THEME)->display();
     }
 
-    public function news() {
+    public function comments() {
     	$Pid = $_GET['place'];
-    	$url= C('NEWS');
-		redirect($url[$Pid]);
-        // $this->theme($_GET['site'])->display();
+        $Comments = M("Comment");
+        $data = $Comments->where("place_id=".$Pid)->order("comment_date desc")->select();
+        $this->assign("comments",$data);
+        $THEME = get_theme($Pid);
+        if(session("?user")==true) {
+            $this->assign("user",session("user"));
+        }
+        $this->assign("pid",$Pid);
+        $this->theme($THEME)->display();
+    }
+
+    public function post_comment() {
+        if(IS_POST) {
+            $data["comment_body"] = I("post.comment_body");
+            $data["place_id"] = I("get.pid");
+            $data["user"] = I("get.user");
+            if($data["user"]=="") {
+                $this->error("登录才可以发表评论");
+            }
+            $Comments = M("Comment");
+            $data['comment_date'] = date('Y-m-d H:i:s');
+            if($Comments->data($data)->add()) {
+                $this->success("评论成功");
+            } else {
+                $this->error("评论失败");
+            }
+        }
     }
 
 

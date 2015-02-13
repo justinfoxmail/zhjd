@@ -1,12 +1,12 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class ActivityController extends Controller {
+class CommentController extends Controller {
     
     public function index(){
         check_login();
-        check_permittion('Activity');
-        $this->assign('MODELID','Activity');
+        check_permittion('Comment');
+        $this->assign('MODELID','Comment');
 		$this->display();
     }
 

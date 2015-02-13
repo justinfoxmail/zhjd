@@ -11,7 +11,7 @@ class IndexController extends Controller {
             $User = M("User");
             $map['loginname'] = I("post.username");
             $map['password'] = md5(I("post.password"));
-            if($User->where($map)->select()) {
+            if($User->where($map)->select() && $User->where($map)->getField('usertype')!=2) {
                 $_SESSION[C("USER_AUTH_KEY")] = $map['loginname'];
                 session('user_name',$map['loginname']);
                 session('CURRENT_PROJECT',0);

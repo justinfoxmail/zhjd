@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $http, $ionicModal, $timeout) {
   $scope.loginData = {};
 
   $ionicModal.fromTemplateUrl('Template/home/login.html', {
@@ -18,7 +18,19 @@ angular.module('starter.controllers', [])
   };
 
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+    $http.post("/index.php/Index/doLogin",$scope.loginData).success(function(data) {
+      switch(data) {
+        case 0:
+              $scope.loginData.loginstatus = "登录失败";
+              break;
+        case 1:
+              $scope.loginData.loginstatus = "登录成功";
+              break;
+        case 2:
+              $scope.loginData.loginstatus = "你已经登录过了";
+      }
+      $scope.loginData.loginstatus = "";
+    });
 
     $timeout(function() {
       $scope.closeLogin();

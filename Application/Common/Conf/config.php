@@ -1,11 +1,5 @@
 <?php
 return array(
-	//'配置项'=>'配置值'
-    "NEWS" => array('1' => 'http://osrzh.com/About/news/index.aspx','2' => 'http://zh.chimelong.com/News/index.aspx',
-                    '3' => 'http://news.baidu.com/ns?tn=news&cl=2&rn=20&ct=1&fr=bks0000&ie=utf-8&word=%E7%9F%B3%E6%99%AF%E5%B1%B1%E5%85%AC%E5%9B%AD',
-                    '4' => 'http://www.ly.com/scenery/BookSceneryTicket_24744.html',
-                    '5' => 'http://www.ymy.com.cn/news.asp?lan=zh-cn&skin=48&id=52' ),
-
 	    //数据库配置信息
     'DB_TYPE'    => 'mysql', // 数据库类型
     'DB_HOST'    => '127.0.0.1', // 服务器地址
