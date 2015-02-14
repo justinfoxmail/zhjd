@@ -1,0 +1,14 @@
+<extend name="Public:base_resturant"/>
+<block name="reslist">
+<volist name="res_arr" id="vo">
+<li class="table-view-cell media">
+    <a href="__URL__/resturant_info?place={$pid}&resid={$key}" class="navigate-right">
+      <img class="media-object pull-left" src="http://placehold.it/42x42">
+      <div class="media-body">
+        {$vo.res_name}
+        <p>{$vo.res_more}</p>
+      </div>
+    </a>
+  </li>
+</volist>
+</block>

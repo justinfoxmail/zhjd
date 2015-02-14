@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>{$name}</title>
+<link type="text/css" rel="stylesheet" href="__CSS__/theme/white_style.css">
+<link type="text/css" rel="stylesheet" href="__CSS__/theme/white.css">
+</head>
+<body>
+  <div class="swiper-container swiper-parent">
+    <div class="swiper-wrapper">
+    
+      <div class="swiper-slide sliderbg_menu">
+          <div class="swiper-container swiper-nested">
+                   <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                                  <div class="slide-inner">
+                                        <div class="logo"><h1 style="color:#323232;">{$name}</h1></div>
+                                        <div class="menu">
+                                        <ul>
+                                        <li><a href="{:U("Place/info?place=$pid")}"><img src="/Public/css/images/home2.png" alt="" title="" /><span>信息</span></a></li>
+                                        <li><a href="{:U("Place/location?place=$pid")}"><img src="/Public/css/images/map2.png" alt="" title="" /><span>地图</span></a></li>
+                                        <li><a href="{:U("Place/photos?place=$pid")}"><img src="/Public/css/images/photos2.png" alt="" title="" /><span>相册</span></a></li>
+                                        <li><a href="{:U("Place/hotel?place=$pid")}"><img src="/Public/css/images/hotel2.png" alt="" title="" /><span>住宿</span></a></li>
+                                        <li><a href="{:U("Place/resturant?place=$pid")}"><img src="/Public/css/images/resturant2.png" alt="" title="" /><span>餐饮</span></a></li>
+                                        <li><a href="{:U("Place/comments?place=$pid")}"><img src="/Public/css/images/comment2.png" alt="" title="" /><span>评论</span></a></li>
+                            
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                        </div>
+                                 </div>
+                         </div>
+                   </div>
+                  <div class="swiper-scrollbar"></div>
+          </div> 
+      </div>
+
+</body>
+</html> <script type="text/javascript">

@@ -1,0 +1,14 @@
+<extend name="Public:base_hotel"/>
+<block name="hotellist">
+<volist name="hotel_arr" id="vo">
+<li class="table-view-cell media">
+    <a href="__URL__/hotel_info?place={$pid}&hotelid={$key}" class="navigate-right">
+      <img class="media-object pull-left" src="http://placehold.it/42x42">
+      <div class="media-body">
+        {$vo.hotel_name}
+        <p>{$vo.hotel_more}</p>
+      </div>
+    </a>
+  </li>
+</volist>
+</block>

@@ -1,0 +1,100 @@
+<!DOCTYPE html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--Declare page as mobile friendly --> 
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+
+<title>{$name}</title>
+
+<link href="__CSS__/theme/flat_style.css"       rel="stylesheet" type="text/css">
+<link href="__CSS__/theme/framework-style.css"   rel="stylesheet" type="text/css">
+<link href="__CSS__/theme/framework.css"       rel="stylesheet" type="text/css">
+
+<script src="__JS__/jquery-2.1.1.min.js"   type="text/javascript"></script>  
+<script src="__JS__/theme/framework.js"    type="text/javascript"></script>
+<style>
+.nav_bar{
+    width:270px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nav_text{
+    padding-left:35px; 
+    float:left;
+    width:90px;
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div id="status">
+      <p class="center-text">
+      载入中...
+            <em>@珠海旅游景点</em>
+        </p>
+    </div>
+</div>
+
+<div class="content">
+
+  <div class="landing-logo">
+      <img class="replace-2x" src="http://www.lanrenmb.com/wap/271/images/logo.png" alt="img" width="100"></div>
+    </div>
+    
+    <div class="welcome-text">
+      <h3>欢迎来到 {$name}</h3>
+        <p>Flat, simple, intuitive!</p>    
+    </div>
+    
+    <div class="navigation-icons">
+      <a href="{:U("Place/info?place=$pid")}" class="nav-icon icon-red info-nav"></a>
+        <a href="{:U("Place/hotel?place=$pid")}" class="nav-icon icon-blue hotel-nav"></a>
+        <a href="{:U("Place/resturant?place=$pid")}" class="nav-icon icon-magenta res-nav"></a>
+    </div>
+    <div class="nav_bar">
+        <p class="nav_text">信息</p>
+        <p class="nav_text">住宿</p>
+        <p class="nav_text">餐饮</p>
+    </div>
+    <div class="navigation-icons">
+        <a href="{:U("Place/photos?place=$pid")}" class="nav-icon icon-dblue photos-nav"></a>
+        <a href="{:U("Place/location?place=$pid")}" class="nav-icon icon-green map-nav"></a>
+        <a href="{:U("Place/comments?place=$pid")}" class="nav-icon icon-yellow comment-nav"></a>
+    </div>
+    <div class="nav_bar">
+        <p class="nav_text">相册</p>
+        <p class="nav_text">地图</p>
+        <p class="nav_text">评论</p>
+    </div>
+    <p class="landing-copyright copyright">@珠海旅游景点</p>
+    
+</div>
+
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

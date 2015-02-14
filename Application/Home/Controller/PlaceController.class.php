@@ -7,6 +7,7 @@ class PlaceController extends Controller {
         $Place = M('Place');
         $THEME = $Place->where('id='.$ID)->getField('theme');
         $PLACE_NAME = $Place->where('id='.$ID)->getField('name');
+        $this->assign('name',$PLACE_NAME);
         $this->assign('pid',$ID);
 	    $this->theme($THEME)->display();
     }
@@ -89,7 +90,7 @@ class PlaceController extends Controller {
         $resturant = $Place->relation('Resturant')->find($Pid);
         $res_data = $resturant['Resturant'][$ResId];
         $this->assign('res_name',$res_data['res_name']);
-        $this->assign('res_more',$res_data['res_introduction']);
+        $this->assign('res_introduction',$res_data['res_introduction']);
         $this->assign('res_time',$res_data['res_time']);
         $this->assign('res_location',$res_data['res_location']);
         $this->assign('res_feature',$res_data['res_feature']);

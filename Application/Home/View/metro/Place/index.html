@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>{$name}</title>
+<link type="text/css" rel="stylesheet" href="__CSS__/theme/metro_style.css">
+<link type="text/css" rel="stylesheet" href="__CSS__/theme/metro.css">
+</head>
+<body>
+
+  <div class="swiper-container swiper-parent">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide sliderbg_menu">
+          <div class="swiper-container swiper-nested">
+                   <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                          <div class="slide-inner">
+                                <div class="logo">{$name}</div>
+                                <div class="menu">
+                                <ul>
+                                <li class="green"><a href="{:U("Place/info?place=$pid")}"><img src="/Public/css/images/home.png" alt="" title="" /><span>信息</span></a></li>
+                                <li class="red"><a href="{:U("Place/location?place=$pid")}" ><img src="/Public/css/images/map.png" alt="" title="" /><span>地图</span></a></li>
+                                <li class="blue"><a href="{:U("Place/hotel?place=$pid")}"><img src="/Public/css/images/hotel.png" alt="" title="" /><span>住宿</span></a></li>
+                                <li class="orange"><a href="{:U("Place/resturant?place=$pid")}"><img src="/Public/css/images/resturant.png" alt="" title="" /><span>餐饮</span></a></li>
+                                <li class="purple"><a href="{:U("Place/photos?place=$pid")}"><img src="/Public/css/images/photos.png" alt="" title="" /><span>相册</span></a></li>
+                                <li class="yellow"><a href="{:U("Place/comments?place=$pid")}"><img src="/Public/css/images/comment.png" alt="" title="" /><span>评论</span></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                                </div>
+                         </div>
+                        </div>
+                   </div>
+                  <div class="swiper-scrollbar"></div>
+          </div> 
+      </div>
+
+    </div>
+    <div class="pagination"></div>
+  </div>
+
+</body>
+</html> <script type="text/javascript">
