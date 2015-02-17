@@ -6,7 +6,7 @@
       <ion-item ng-repeat="playlist in playlists" item="item"
                   class="item-remove-animate">
   		    <a class="item item-thumbnail-left" ng-click="goPlace({{playlist.id}})">
-  		      <img src="http://placehold.it/96x96">
+  		      <img src="{{playlist.cover}}">
   		      <h2>{{playlist.name}}</h2>
   		      <p>珠海</p>
   		    </a>

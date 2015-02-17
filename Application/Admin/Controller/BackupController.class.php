@@ -74,18 +74,26 @@ class BackupController extends Controller {
             $this->error('数据库备份失败！');
         }
     }
+    function backallfile() {
+        $tables = $this->getTables();
+        if ($this->backupfile($tables)) {
+            $this->success('数据库备份成功！');
+        } else {
+            $this->error('数据库备份失败！');
+        }
+    }
     /* -
      * +------------------------------------------------------------------------
      * * @ 按表备份，可批量
      * +------------------------------------------------------------------------
      */
     function backtables() {
-        $tab = $_REQUEST['tab'];
+        $tab = $_GET['tab'];
         if (is_array($tab))
             $tables = $tab;
         else
             $tables[] = $tab;
-        if ($this->backup($tables)) {
+        if ($this->backupfile($tables)) {
             if (is_array($tab))
                 $this->success('数据库备份成功！');
             else
@@ -185,10 +193,10 @@ class BackupController extends Controller {
      * * @ 把数据写入磁盘
      * +------------------------------------------------------------------------
      */
-    private function setFile() {
+    private function setFile($name) {
         $recognize = '';
         $recognize = $this->dbName;
-        $fileName = C('DB_BACKUP') . $this->dir_sep . $recognize . '_' . date('YmdHis') . '_' . mt_rand(100000000, 999999999) . '.sql';
+        $fileName = C('DB_BACKUP') .$name. $this->dir_sep . $recognize . '_' . date('YmdHis') . '_' . mt_rand(100000000, 999999999) .'.sql';
         $path = $this->setPath($fileName);
         if ($path !== true) {
             $this->error("无法创建备份目录 '$path'");
@@ -214,9 +222,10 @@ class BackupController extends Controller {
             $this->downloadFile($fileName);
         }
     }
-    // private function trimPath($path) {
-    //     return str_replace(array('/', '\\', '//', '\\\\'), $this->dir_sep, $path);
-    // }
+    private function trimPath($path) {
+        // return str_replace(array('/', '\\', '//', '\\\\'), $this->dir_sep, $path);
+        return $path;
+    }
     private function setPath($fileName) {
         $dirs = explode($this->dir_sep, dirname($fileName));
         $tmp = '';
@@ -314,13 +323,9 @@ class BackupController extends Controller {
             $table = $this->backquote($table);                                  //为表名增加 ``
             $M = M();
             $tableRs = $M->query("SHOW CREATE TABLE {$table}");       //获取当前表的创建语句
-            if (!empty($tableRs[0]["Create View"])) {
-                $this->content .= "\r\n /* 创建视图结构 {$table}  */";
-                $this->content .= "\r\n DROP VIEW IF EXISTS {$table};/* MySQLReback Separation */ " . $tableRs[0]["Create View"] . ";/* MySQLReback Separation */";
-            }
-            if (!empty($tableRs[0]["Create Table"])) {
-                $this->content .= "\r\n /* 创建表结构 {$table}  */";
-                $this->content .= "\r\n DROP TABLE IF EXISTS {$table};/* MySQLReback Separation */ " . $tableRs[0]["Create Table"] . ";/* MySQLReback Separation */";
+            if (!($table == "`think_place`")) {
+                $this->content .= "\r\n /* 插入数据 {$table}  */";
+                $this->content .= "\r\n DELETE FROM {$table};/* MySQLReback Separation */";
                 $tableDateRow = $M->query("SELECT * FROM {$table}");
                 $valuesArr = array();
                 $values = '';
@@ -345,12 +350,94 @@ class BackupController extends Controller {
                         }
                     }
                 }
-//                dump($this->content);
-//                exit;
             }
         }
         if (!empty($this->content)) {
-            $this->setFile();
+            $this->setFile('all_table');
+        }
+        return true;
+    }
+
+    private function backupfile($tables) {
+        if (empty($tables))
+            $this->error('没有需要备份的数据表!');
+        $this->content = '/* This file is created by MySQLReback ' . date('Y-m-d H:i:s') . ' */';
+
+        foreach ($tables as $i => $table) {
+            $table = $this->backquote($table);                                  //为表名增加 ``
+            $M = M();
+            $tableRs = $M->query("SHOW CREATE TABLE {$table}");       //获取当前表的创建语句
+            if (!empty($tableRs[0]["Create Table"])) {
+                $this->content .= "\r\n /* 创建表结构 {$table}  */";
+                $this->content .= "\r\n DELETE FROM {$table};/* MySQLReback Separation */";
+                if(($table == "`think_place`") || ($table == "`think_user`"))
+                {
+                $tableDateRow = $M->query("SELECT * FROM {$table}");
+                $valuesArr = array();
+                $values = '';
+                if (false != $tableDateRow) {
+                    foreach ($tableDateRow as &$y) {
+                        foreach ($y as &$v) {
+                           if ($v=='')                                  //纠正empty 为0的时候  返回tree
+                                $v = 'null';                                    //为空设为null
+                            else
+                                $v = "'" . mysql_escape_string($v) . "'";       //非空 加转意符
+                        }
+                        $valuesArr[] = '(' . implode(',', $y) . ')';
+                    }
+                }
+                $temp = $this->chunkArrayByByte($valuesArr);
+                if (is_array($temp)) {
+                    foreach ($temp as $v) {
+                        $values = implode(',', $v) . ';/* MySQLReback Separation */';
+                        if ($values != ';/* MySQLReback Separation */') {
+                            $this->content .= "\r\n /* 插入数据 {$table} */";
+                            $this->content .= "\r\n INSERT INTO {$table} VALUES {$values}";
+                        }
+                    }
+                }
+                }
+
+            }
+        }
+
+
+        foreach ($tables as $i => $table) {
+            $table = $this->backquote($table);                                  //为表名增加 ``
+            $M = M();
+            $tableRs = $M->query("SHOW CREATE TABLE {$table}");       //获取当前表的创建语句
+            if (!empty($tableRs[0]["Create Table"]) && !($table == "`think_place`") && !($table == "`think_user`")) {
+                $tableDateRow = $M->query("SELECT * FROM {$table}");
+                $valuesArr = array();
+                $values = '';
+                if (false != $tableDateRow) {
+                    foreach ($tableDateRow as &$y) {
+                        foreach ($y as &$v) {
+                           if ($v=='')                                  //纠正empty 为0的时候  返回tree
+                                $v = 'null';                                    //为空设为null
+                            else
+                                $v = "'" . mysql_escape_string($v) . "'";       //非空 加转意符
+                        }
+                        $valuesArr[] = '(' . implode(',', $y) . ')';
+                    }
+                }
+                $temp = $this->chunkArrayByByte($valuesArr);
+                if (is_array($temp)) {
+                    foreach ($temp as $v) {
+                        $values = implode(',', $v) . ';/* MySQLReback Separation */';
+                        if ($values != ';/* MySQLReback Separation */') {
+                            $this->content .= "\r\n /* 插入数据 {$table} */";
+                            $this->content .= "\r\n INSERT INTO {$table} VALUES {$values}";
+                        }
+                    }
+                }
+            }
+        }
+        if (!empty($this->content)) {
+        	if(empty($tables[1]))
+            	$this->setFile($tables[0]);
+        	else
+        		$this->setFile('ALLSQL');
         }
         return true;
     }
