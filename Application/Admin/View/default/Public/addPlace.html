@@ -1,0 +1,50 @@
+			<div class="modal fade" id="placeModal" tabindex="-1" role="dialog" aria-labelledby="placeModal" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			        <h4 class="modal-title" id="placeModal">添加景点</h4>
+			      		</div>
+					      <div class="modal-body">
+					   			<form class="form-horizontal" role="form" method="post" id="place_form" action="{:U('Place/newplace')}">
+								<div class="form-group">
+				   					 <label for="name" class="col-sm-2 control-label">景点名字</label>
+				    					<div class="col-sm-8"><input type="text" required="required" class="form-control" id="name" value="" name="name"></div>
+				 			    </div>
+
+<!-- 								<div class="form-group">
+				   					 <label for="place_name" class="col-sm-2 control-label">模板选择</label>
+				    					<div class="col-sm-8"><input type="text" required="required" class="form-control" id="place_name" value="" name="place_name"></div>
+				 			    </div>
+								<div class="form-group">
+				   					 <label for="place_name" class="col-sm-2 control-label">封面图片</label>
+				    					<div class="col-sm-8"><input type="text" required="required" class="form-control" id="place_name" value="" name="place_name"></div>
+				 			    </div> -->
+<!-- 
+								<div class="form-group">
+									<label for="place_information" class="col-sm-2 control-label">信息</label>
+									<div class="col-sm-8"><textarea class="form-control" required="required" rows="5" id="place_information" name="place_information"></textarea></div>
+								</div>
+								<div class="form-group">
+				   					 <label for="place_ticket" class="col-sm-2 control-label">门票</label>
+				    					<div class="col-sm-8"><input type="text" class="form-control" id="place_ticket"  name="place_ticket"></div>
+				 			    </div>
+				 			    <div class="form-group">
+				   					 <label for="place_introduction" class="col-sm-2 control-label">简介</label>
+				    					<div class="col-sm-8"><textarea class="form-control" required="required" rows="5" id="place_introduction" name="place_introduction"></textarea></div>
+				 			    </div>
+				 			    <div class="form-group">
+				   					 <label for="place_location" class="col-sm-2 control-label">位置</label>
+				    					<div class="col-sm-8"><input type="text" class="form-control" id="place_location" name="place_location"></div>
+				 			    </div>
+				 			    <div class="form-group">
+				   					 <label for="place_more" class="col-sm-2 control-label">更多信息</label>
+				    					<div class="col-sm-8"><textarea class="form-control" required="required" rows="5" id="place_more" name="place_more"></textarea></div>
+				 			    </div> -->
+								<input class="col-md-offset-9 btn btn-primary" type="submit" value="提交">
+								<input class="btn btn-default" type="button" data-dismiss="modal" value="取消">
+							</form>
+					      </div>
+			  			</div>
+				</div>
+			</div>

@@ -80,7 +80,7 @@ angular.module('starter.controllers', [])
         var deferred = $q.defer();
 
       var matches = data.filter( function(data) {
-        if(data.title.indexOf(searchFilter) !== -1 ) return true;
+        if(data.name.indexOf(searchFilter) !== -1 ) return true;
       })
         $timeout( function(){
            deferred.resolve( matches );
@@ -94,7 +94,7 @@ angular.module('starter.controllers', [])
 
 .controller('SearchCtrl', ['$scope', '$http', 'FlightDataService', function($scope, $http, FlightDataService) {
 
-    $http.get("/Data/Common/index.json").success(function(data) {
+    $http.get("/index.php/Index/getIndexs").success(function(data) {
         $scope.playlists=data;
         $scope.search();
     });

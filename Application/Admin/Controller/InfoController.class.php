@@ -7,16 +7,19 @@ class InfoController extends Controller {
         check_login();
         check_permittion('Info');
         $Pid = session('CURRENT_PROJECT');
-		$Info = D("Info");
-		$data = $Info->getData($Pid);
-		$this->assign('information',$data[$Pid]['information']);
-		$this->assign('ticket',$data[$Pid]['ticket']);
-		$this->assign('introduction',$data[$Pid]['introduction']);
-		$this->assign('location',$data[$Pid]['location']);
-		$this->assign('more',$data[$Pid]['more']);
-		$this->assign('place',$Pid);
+        $Info = D("Info");
+        $data = $Info->getData($Pid);
+
+        $id = M("Info")->field(id)->where('place_id='.$Pid)->find();
+
+        $this->assign('information',$data[$id['id']]['information']);
+        $this->assign('ticket',$data[$id['id']]['ticket']);
+        $this->assign('introduction',$data[$id['id']]['introduction']);
+        $this->assign('location',$data[$id['id']]['location']);
+        $this->assign('more',$data[$id['id']]['more']);
+        $this->assign('place',$Pid);
         $this->assign('MODELID','Info');
-		$this->display();
+        $this->display();
     }
 
     public function update() {

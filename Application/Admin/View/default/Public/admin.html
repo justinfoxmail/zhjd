@@ -13,6 +13,7 @@
 <script src="__JS__/bootstrap.min.js"></script>
 <script src="__JS__/admin.js"></script>
 <script src="__JS__/plugins/metisMenu.min.js"></script>
+<script src="__JS__/common/postEdit.js"></script>
 <script>
 $(document).ready(function(){
 	$("#{$MODELID}").addClass("active");
@@ -30,6 +31,21 @@ $(document).ready(function(){
 		$(this).parent().addClass("active");
 		$(this).addClass("active");
 	});
+    $.get("/index.php/Index/getIndexs",
+        function(data){
+            $.each(data,function(index,data){
+                $("#OptionalProject").append("<option value="+data['id']+">"+data['name']+"</option>");
+                $("#OptionalProject").val({$Think.session.CURRENT_PROJECT});
+            });
+        }
+    );
+});
+</script>
+<script type="text/javascript">
+$(function(){
+    $(".addplace").bind("click",function(){
+                $("#placeModal").modal("show");
+    });
 });
 </script>
 <block name="extra-js"></block>
@@ -60,6 +76,10 @@ $(document).ready(function(){
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> {$Think.session.user_name}</a>
                         </li>
+                        <li><a href="javascript:void(0)" class="addplace"><i class="fa fa-gear fa-fw"></i> 添加景点</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
                         <li class="divider"></li>
                         <li><a href="{:U('Index/logout')}"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
                         </li>
@@ -77,12 +97,12 @@ $(document).ready(function(){
 							<h5>可选项目</h5>
 						</center>
 						<select class="form-control" id="OptionalProject">
-							<option value="0"></option>
-                            <option value="1">海泉湾</option>
+<!--                             <option value="1">海泉湾</option>
                             <option value="2">长隆海洋王国</option>
                             <option value="3">石景山公园</option>
                             <option value="4">海洋乐园</option>
                             <option value="5">圆明新园</option>
+                            <option value="6">= =</option> -->
                         </select>
 
                         <li>
@@ -166,9 +186,9 @@ $(document).ready(function(){
                                     <a href="{:U('News/index')}" id="News">新闻管理</a>
                                 </li>
                             </if>
-                            <if condition="$Think.session.Comment_PERMIT eq TRUE">
+                            <if condition="$Think.session.Activity_PERMIT eq TRUE">
                                 <li>
-                                    <a href="{:U('Comment/index')}" id="Comment">评论管理</a>
+                                    <a href="{:U('Activity/index')}" id="Activity">活动管理</a>
                                 </li>
                             </if>
                             </ul>
@@ -185,6 +205,7 @@ $(document).ready(function(){
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+	<include file="Public/addPlace" />
 
 
 
