@@ -9,7 +9,7 @@ class IndexController extends Controller {
     public function doLogin() {
         if(IS_POST) {
             $User = M("User");
-            if(empty(I("post."))){
+            if(I("post.")==null){
                 $params = json_decode(file_get_contents('php://input'),true);
             } else {
                 $params = I("post.");
